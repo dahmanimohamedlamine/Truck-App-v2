@@ -745,8 +745,6 @@ const COLUMN_LABELS = {
 
 
 function displayData() {
-
-
     const tableHeader = document.getElementById('tableHeader');
     const tableBody = document.getElementById('tableBody');
     tableHeader.innerHTML = '';
@@ -757,9 +755,11 @@ function displayData() {
     if (groupedExportData.length === 0) return;
 
     const headers = Object.keys(groupedExportData[0]);
+
+    // ✅ Render column labels only once
     headers.forEach(key => {
         const th = document.createElement('th');
-        th.textContent = key;
+        th.textContent = COLUMN_LABELS[key] || key;
         tableHeader.appendChild(th);
     });
 
@@ -775,12 +775,14 @@ function displayData() {
     const pageData = groupedExportData.slice(startIdx, endIdx);
 
     const fragment = document.createDocumentFragment();
+
+    // ✅ Render table rows and cells
     pageData.forEach(row => {
         const tr = document.createElement('tr');
         headers.forEach(key => {
-            const th = document.createElement('th');
-            th.textContent = COLUMN_LABELS[key] || key; // Use label if available
-            tableHeader.appendChild(th);
+            const td = document.createElement('td');
+            td.textContent = row[key] !== undefined ? row[key] : '';
+            tr.appendChild(td);
         });
         fragment.appendChild(tr);
     });
