@@ -743,6 +743,15 @@ const COLUMN_LABELS = {
     "Danno rivalutato WACC": "Danno Rivalutato WACC (€)"
 };
 
+const EURO_COLUMNS = [
+    'prezzo_netto',
+    'Danno Sovrapprezzo',
+    'Danno Totale',
+    'Interessi legali',
+    'Interessi legali WACC',
+    'Danno rivalutato',
+    'Danno rivalutato WACC'
+];
 
 function displayData() {
     const tableHeader = document.getElementById('tableHeader');
@@ -756,12 +765,12 @@ function displayData() {
 
     const headers = Object.keys(groupedExportData[0]);
 
+    // Render column headers with friendly labels
     headers.forEach(key => {
         const th = document.createElement('th');
         th.textContent = COLUMN_LABELS[key] || key;
         tableHeader.appendChild(th);
     });
-
 
     const totalPages = Math.ceil(groupedExportData.length / rowsPerPage);
     document.getElementById('totalPages').textContent = totalPages;
@@ -776,14 +785,26 @@ function displayData() {
 
     const fragment = document.createDocumentFragment();
 
-    // ✅ Render table rows and cells
+    // Render table rows
     pageData.forEach(row => {
         const tr = document.createElement('tr');
+
         headers.forEach(key => {
             const td = document.createElement('td');
-            td.textContent = row[key] !== undefined ? row[key] : '';
+            let value = row[key];
+
+            if (EURO_COLUMNS.includes(key) && typeof value === 'number') {
+                value = `€ ${value.toLocaleString('it-IT', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                })}`;
+                td.classList.add('euro'); // Optional: apply right alignment
+            }
+
+            td.textContent = value !== undefined ? value : '';
             tr.appendChild(td);
         });
+
         fragment.appendChild(tr);
     });
 
