@@ -310,3 +310,7 @@ tbody tr:hover {
 }
 
 
+td.euro {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
