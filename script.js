@@ -727,9 +727,26 @@ function getGroupedExportTableData() {
     });
 }
 
+const COLUMN_LABELS = {
+    impresa: "Impresa",
+    targa: "Targa",
+    acquistoleasing: "Tipo Acquisto",
+    nuovousato: "Condizione",
+    dataacquisto: "Data Acquisto",
+    statoattuale: "Stato Attuale",
+    prezzo_netto: "Prezzo Netto (€)",
+    "Danno Sovrapprezzo": "Danno Sovrapprezzo (€)",
+    "Danno Totale": "Danno Totale (€)",
+    "Interessi legali": "Interessi Legali (€)",
+    "Interessi legali WACC": "Interessi Legali WACC (€)",
+    "Danno rivalutato": "Danno Rivalutato (€)",
+    "Danno rivalutato WACC": "Danno Rivalutato WACC (€)"
+};
 
 
 function displayData() {
+
+
     const tableHeader = document.getElementById('tableHeader');
     const tableBody = document.getElementById('tableBody');
     tableHeader.innerHTML = '';
@@ -761,9 +778,9 @@ function displayData() {
     pageData.forEach(row => {
         const tr = document.createElement('tr');
         headers.forEach(key => {
-            const td = document.createElement('td');
-            td.textContent = row[key] !== undefined ? row[key] : '';
-            tr.appendChild(td);
+            const th = document.createElement('th');
+            th.textContent = COLUMN_LABELS[key] || key; // Use label if available
+            tableHeader.appendChild(th);
         });
         fragment.appendChild(tr);
     });
