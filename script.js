@@ -756,12 +756,12 @@ function displayData() {
 
     const headers = Object.keys(groupedExportData[0]);
 
-    // ✅ Render column labels only once
     headers.forEach(key => {
         const th = document.createElement('th');
         th.textContent = COLUMN_LABELS[key] || key;
         tableHeader.appendChild(th);
     });
+
 
     const totalPages = Math.ceil(groupedExportData.length / rowsPerPage);
     document.getElementById('totalPages').textContent = totalPages;
