@@ -1,0 +1,312 @@
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Improves readability */
+    font-size: 16px; /* Sets a base font size for better readability */
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 3fr 5fr; /* Sidebar and main content */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Responsive Layout */
+@media (max-width: 500px) {
+    .container {
+        grid-template-columns: 1fr; /* Stack the sidebar and main content */
+    }
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Always 2 equal-width columns */
+    gap: 15px; /* Spacing between items */
+    margin-top: 20px;
+    grid-auto-rows: minmax(50px, auto); /* Consistent row height */
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column; /* Stack label and input/select vertically */
+    justify-content: start; /* Align items at the top */
+    align-items: stretch; /* Stretch to match container width */
+    width: 100%; /* Ensure uniform width for all filter groups */
+    box-sizing: border-box; /* Include padding/borders in width */
+}
+
+.filter-group input, .filter-group select {
+    width: 100%; /* Inputs and selects take full width */
+    box-sizing: border-box; /* Padding and border included in width */
+}
+
+.input-with-symbol {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between input and symbol */
+    width: 100%; /* Ensure it fits within the parent container */
+}
+
+/* Sidebar (Filters) */
+.filters {
+    grid-column: 1;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: #1e1e1e;
+    padding: 20px;
+    overflow-y: auto;
+    border-right: 1px solid #444;
+}
+
+.filters h2 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #ffa500;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Always occupy two columns */
+    gap: 15px;
+    margin-top: 20px;
+    grid-auto-rows: minmax(50px, auto); /* Ensure consistent row heights */
+}
+
+.filter-group {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffa500;
+}
+
+/* For the filters that need to take two rows */
+.filter-group.condizione,
+.filter-group.acquisto,
+.filter-group.statoAttuale {
+    grid-row: span 2;  /* Spans two rows */
+}
+
+
+.filter-group-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Adjust spacing between the two elements */
+    margin-top: 10px;
+}
+
+.filter-group {
+    flex: 1; /* This ensures the filter group takes up equal space */
+}
+
+.filter-group input,
+.filter-group select {
+    width: 100%; /* Ensures input/select elements expand to fill their container */
+}
+
+.filter-grid label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffa500;
+}
+
+/* Styling for input, select, and button elements */
+input, select, button {
+    background-color: #292929;
+    color: #e0e0e0;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+input:focus, select:focus, button:focus {
+    outline: none;
+    border-color: #ffa500
+    box-shadow: 0 0 4px #ffa500;
+}
+
+/* Stats Section */
+.stats {
+    display: block; /* Stack stats vertically */
+    gap: 15px; /* Space between each stat box */
+    margin: 20px 0;
+}
+
+/* Each stat box (results) */
+.stat {
+    background: #292929; /* Dark background for the stat box */
+    padding: 10px; /* Padding inside the box */
+    border-radius: 8px; /* Rounded corners for the box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Slight shadow to lift the box */
+    border: 2px solid #444; /* Border around the stat box */
+    margin-bottom: 20px; /* Space between each stat box */
+    transition: transform 0.2s ease-in-out; /* Hover effect for interaction */
+}
+
+.stat:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.stat h3 {
+    color: #ffa500; /* Title color */
+    margin-bottom: 5px; /* Space between the header and the content */
+    margin-top: 0; /* Removes unnecessary top margin */
+    font-size: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between; /* Space out label and value */
+    margin-bottom: 5px; /* Space between each stat item */
+    font-size: 0.8rem;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: #ffffff; /* Label color */
+    font-size: 0.8rem;
+    justify-content: center;
+}
+
+/* The result value box */
+.stat-value-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #444; /* Background color for the result box */
+    color: #ffa500; /* Color for the result text */
+    padding: 10px 20px; /* Padding inside the result box */
+    border-radius: 4px; /* Rounded corners for the result box */
+    font-size: 0.8rem;
+    font-weight: bold;
+    min-width: 100px; /* Minimum width for the box */
+}
+
+
+/* Optional: Add hover effect to emphasize when the user interacts */
+.stat:hover {
+    background-color: #333;
+    transform: scale(1.02);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+/* Table Section */
+.table-container {
+    grid-column: 2;
+    overflow-y: auto;
+    background-color: #1e1e1e;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid #444;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead tr {
+    background: #ffa500;
+    color: #121212;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #444;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background: #292929;
+}
+
+tbody tr:nth-child(odd) {
+    background: #1e1e1e;
+}
+
+tbody tr:hover {
+    background: #333; /* Highlight on hover */
+}
+.pagination { display: flex; justify-content: space-between; margin-top: 10px; color: #9a9abe; align-items: center; }
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background: #ffa500;
+    color: #121212;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.pagination button:hover {
+    background: #66bb6a;
+}
+
+.pagination button:disabled {
+    background: #444;
+    cursor: not-allowed;
+    color: #666;
+}
+
+/* Export Button */
+.export-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.export-container button {
+    background: #ffa500;
+    color: #121212;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.export-container button:hover {
+    background: #66bb6a;
+}
+
+#loadingBarContainer {
+    margin-top: 10px;
+}
+
+#loadingLabel {
+    color: #ffa500;
+}
+
+/* Input Enhancements */
+.input-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
+.input-with-symbol .symbol {
+    color: #ffa500;
+    font-weight: bold;
+}
+
+

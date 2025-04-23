@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Filters for Truck Dataset</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Filters Section -->
+        <aside class="filters">
+            <!-- File Upload Section -->
+            <div class="filter-group">
+                <label for="fileUpload">Carica il file:</label>
+                <input type="file" id="fileUpload" accept=".xlsx">
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="causa">Causa:</label>
+                    <select id="causa" aria-label="Seleziona la causa"></select>
+                </div>
+                <div class="filter-group">
+                    <label for="prezzo">Prezzo:</label>
+                    <select id="prezzo" aria-label="Seleziona il prezzo"></select>
+                </div>
+                <div class="filter-group">
+                    <label for="marca">Marca:</label>
+                    <select id="marca" multiple size=3></select>
+                </div>
+                <div class="filter-group">
+                    <label for="acquisto">Tipologia Acquisto:</label>
+                    <select id="acquisto" multiple size=3></select>
+                </div>
+                <div class="filter-group">
+                    <label for="condizione">Condizione:</label>
+                    <select id="condizione" multiple size=2></select>
+                </div>
+                <div class="filter-group">
+                    <label for="statoAttuale">Stato Attuale dei Camion:</label>
+                    <select id="statoAttuale" multiple size=2></select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="dataFineRivalutazione">Data Fine Rivalutazione:</label>
+                    <input type="date" id="dataFineRivalutazione" value="2025-02-28" onchange="expandTable()">
+                </div>
+
+                <div class="filter-group">
+                    <label for="periodoLingering">Periodo Lingering (Anni):</label>
+                    <select id="periodoLingering" aria-label="Seleziona il periodo lingering">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3" selected>3</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sovrapprezzoCartello">Periodo Cartello:</label>
+                    <div class="input-with-symbol">
+                        <input type="number" id="sovrapprezzoCartello" placeholder="33.4" value="33.4" onchange="ProcessData()">
+                        <span class="symbol">%</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sovrapprezzoLingering">Periodo Lingering:</label>
+                    <div class="input-with-symbol">
+                        <input type="number" id="sovrapprezzoLingering" placeholder="18.1" value="18.1" onchange="ProcessData()">
+                        <span class="symbol">%</span>
+                    </div>
+                </div>
+            </div>
+    <!-- Results Section -->
+                <section class="stats">
+                    <!-- General Overview: Truck Count and Total Purchases -->
+                    <div class="stat">
+                        <h3>Panoramica Generale</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Conteggio dei Camion:</span>
+                            <span class="stat-value-box" id="conteggio">0</span> <!-- Result inside the box -->
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Totale Acquisti (Fatturato):</span>
+                            <span class="stat-value-box" id="fatturato">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                    </div>
+
+                    <!-- Damage Information: Cartello and Lingering Overcharge -->
+                    <div class="stat">
+                        <h3>Informazioni Danno</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Danno Sovrapprezzo (Periodo Cartello):</span>
+                            <span class="stat-value-box" id="dannoCartello">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Danno Sovrapprezzo (Periodo Lingering):</span>
+                            <span class="stat-value-box" id="dannoLingering">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Danno Sovrapprezzo Totale:</span>
+                            <span class="stat-value-box" id="dannoTotale">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                    </div>
+
+                    <!-- Interest and Revaluation: Legal Interests and Revalued Damage -->
+                    <div class="stat">
+                        <h3>Interessi e Rivalutazione</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Interessi Legali Totale:</span>
+                            <span class="stat-value-box" id="interessiLegaliTotale">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Interessi Legali WACC Totale:</span>
+                            <span class="stat-value-box" id="interessiLegaliWACCTotale">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Danno Rivalutato Totale:</span>
+                            <span class="stat-value-box" id="dannoRivalutatoTotale">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Danno Rivalutato WACC Totale:</span>
+                            <span class="stat-value-box" id="dannoRivalutatoWACCTotale">€0,00</span> <!-- Result inside the box -->
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+        </aside>
+
+        <!-- Table Section -->
+        <main class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr id="tableHeader"></tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+            <div class="pagination">
+                <button id="prevPage" disabled>Previous</button>
+                <span>Page <input type="number" id="pageInput" min="1" value="1" onchange="goToPage()"> of <span id="totalPages">1</span></span>
+                <button id="nextPage" disabled>Next</button>
+            </div>
+            <div class="export-container">
+                <button id="exportButton" onclick="exportTableToExcel()">Export to Excel</button>
+                <div id="loadingBarContainer" style="display: none;">
+                    <div id="loadingBar"></div>
+                    <p id="loadingLabel"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
