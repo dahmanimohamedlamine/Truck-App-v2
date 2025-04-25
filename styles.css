@@ -201,15 +201,16 @@ input:focus, select:focus, button:focus {
 /* Table Section */
 .table-container {
     grid-column: 2;
-    overflow-x: auto; /* ✅ horizontal scroll when needed */
-    overflow-y: auto; /* ✅ vertical scroll if table is tall */
+    overflow-x: scroll; /* ✅ Always show horizontal scroll bar */
+    overflow-y: auto;
     background-color: #1e1e1e;
     padding: 10px;
     display: block;
     border-left: 1px solid #444;
-    max-width: 100%; /* ✅ Important: respect screen width */
-    height: calc(100vh - 100px); /* optional: so it fits inside screen minus top/bottom space */
+    max-width: 100%;
+    height: calc(100vh - 100px);
 }
+
 
 
 table {
