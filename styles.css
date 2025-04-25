@@ -11,10 +11,10 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 3fr 5fr; /* Sidebar and main content */
+    grid-template-columns: 3fr 5fr;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-y: hidden; /* only vertical hidden */
 }
 
 /* Responsive Layout */
