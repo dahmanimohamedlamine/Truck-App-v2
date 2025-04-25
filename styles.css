@@ -201,7 +201,7 @@ input:focus, select:focus, button:focus {
 /* Table Section */
 .table-container {
     grid-column: 2;
-    overflow-x: auto; /* not only overflow-y! allow horizontal scroll */
+    overflow-x: auto;
     overflow-y: auto;
     background-color: #1e1e1e;
     padding: 10px;
@@ -210,13 +210,12 @@ input:focus, select:focus, button:focus {
     border-left: 1px solid #444;
 }
 
-
 table {
-    width: auto; /* <-- NOT 100%! allow it to shrink/grow */
-    table-layout: auto; /* <-- Let columns resize based on content */
+    width: auto;
+    max-width: 100%;
+    table-layout: auto;
     border-collapse: collapse;
     margin-top: 20px;
-    max-width: 100%; /* optional: avoid overflowing container */
 }
 
 thead tr {
@@ -228,6 +227,9 @@ th, td {
     padding: 12px;
     border: 1px solid #444;
     text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 tbody tr:nth-child(even) {
@@ -237,6 +239,7 @@ tbody tr:nth-child(even) {
 tbody tr:nth-child(odd) {
     background: #1e1e1e;
 }
+
 
 tbody tr:hover {
     background: #333; /* Highlight on hover */
