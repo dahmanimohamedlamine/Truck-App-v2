@@ -201,20 +201,37 @@ input:focus, select:focus, button:focus {
 /* Table Section */
 .table-container {
     grid-column: 2;
-    overflow-x: auto;
-    overflow-y: auto;
+    overflow-x: auto; /* ✅ horizontal scroll when needed */
+    overflow-y: auto; /* ✅ vertical scroll if table is tall */
     background-color: #1e1e1e;
     padding: 10px;
     display: block;
     border-left: 1px solid #444;
+    max-width: 100%; /* ✅ Important: respect screen width */
+    height: calc(100vh - 100px); /* optional: so it fits inside screen minus top/bottom space */
 }
 
+
 table {
-    width: auto;
-    table-layout: auto;
+    width: auto; /* ✅ grow based on content */
+    table-layout: auto; /* ✅ columns adjust to content size */
     border-collapse: collapse;
     margin-top: 20px;
 }
+
+.table-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
 
 thead tr {
     background: #ffa500;
