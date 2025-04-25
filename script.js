@@ -760,10 +760,18 @@ function displayData() {
     tableBody.innerHTML = '';
 
     const groupedExportData = getGroupedExportTableData();
+    const searchValue = document.getElementById('tableSearchInput')?.value?.toLowerCase() || '';
 
     if (groupedExportData.length === 0) return;
 
     const headers = Object.keys(groupedExportData[0]);
+
+    // Filter rows using search value
+    const filteredTableData = groupedExportData.filter(row => {
+        return Object.values(row).some(val =>
+            String(val).toLowerCase().includes(searchValue)
+        );
+    });
 
     // Render column headers with friendly labels
     headers.forEach(key => {
@@ -772,7 +780,7 @@ function displayData() {
         tableHeader.appendChild(th);
     });
 
-    const totalPages = Math.ceil(groupedExportData.length / rowsPerPage);
+    const totalPages = Math.ceil(filteredTableData.length / rowsPerPage);
     document.getElementById('totalPages').textContent = totalPages;
     document.getElementById('pageInput').value = currentPage;
 
@@ -781,7 +789,7 @@ function displayData() {
 
     const startIdx = (currentPage - 1) * rowsPerPage;
     const endIdx = startIdx + rowsPerPage;
-    const pageData = groupedExportData.slice(startIdx, endIdx);
+    const pageData = filteredTableData.slice(startIdx, endIdx);
 
     const fragment = document.createDocumentFragment();
 
@@ -810,6 +818,11 @@ function displayData() {
 
     tableBody.appendChild(fragment);
 }
+
+document.getElementById('tableSearchInput')?.addEventListener('input', () => {
+    currentPage = 1;
+    displayData();
+});
 
 
 document.getElementById('prevPage').addEventListener('click', () => {
