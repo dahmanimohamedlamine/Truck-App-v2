@@ -210,9 +210,9 @@ input:focus, select:focus, button:focus {
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* <-- important: columns auto-size based on content */
 }
 
 thead tr {
@@ -221,8 +221,8 @@ thead tr {
 }
 
 th, td {
-    padding: 12px;
-    border: 1px solid #444;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
     text-align: left;
 }
 
