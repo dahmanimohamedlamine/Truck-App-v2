@@ -201,18 +201,20 @@ input:focus, select:focus, button:focus {
 /* Table Section */
 .table-container {
     grid-column: 2;
-    overflow-x: scroll;
+    overflow-x: auto; /* you can use auto instead of scroll if you want it clean when no scroll needed */
     overflow-y: auto;
-    background-color: #1e1e1e;
+    background-color: #1e1e1e; /* ✅ Keep dark background for table area */
     padding: 10px;
     display: block;
     border-left: 1px solid #444;
     max-width: 100%;
     height: calc(100vh - 100px);
+    position: relative; /* ✅ ADD this to make scroll track visible */
 }
 
+/* Table itself */
 table {
-    min-width: 1200px; /* 🚨 KEY: Table is wider than container */
+    min-width: 1200px;
     width: auto;
     table-layout: auto;
     border-collapse: collapse;
@@ -222,17 +224,18 @@ table {
 /* Horizontal scrollbar under the table */
 .table-container::-webkit-scrollbar {
     height: 8px;
-    background: #ffffff; /* White background */
+    background: transparent; /* <=== ✅ Fix: set transparent here */
 }
 
 .table-container::-webkit-scrollbar-thumb {
-    background: #666; /* Dark grey thumb */
+    background: #666;
     border-radius: 4px;
 }
 
 .table-container::-webkit-scrollbar-track {
-    background: #ffffff; /* White track */
+    background: #ffffff; /* ✅ This shows the white track! */
 }
+
 
 
 thead tr {
