@@ -205,14 +205,12 @@ input:focus, select:focus, button:focus {
     overflow-y: auto;
     background-color: #1e1e1e;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
+    display: block;
     border-left: 1px solid #444;
 }
 
 table {
     width: auto;
-    max-width: 100%;
     table-layout: auto;
     border-collapse: collapse;
     margin-top: 20px;
@@ -228,8 +226,6 @@ th, td {
     border: 1px solid #444;
     text-align: left;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 tbody tr:nth-child(even) {
@@ -239,6 +235,7 @@ tbody tr:nth-child(even) {
 tbody tr:nth-child(odd) {
     background: #1e1e1e;
 }
+
 
 
 tbody tr:hover {
