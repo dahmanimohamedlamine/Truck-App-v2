@@ -201,7 +201,7 @@ input:focus, select:focus, button:focus {
 /* Table Section */
 .table-container {
     grid-column: 2;
-    overflow-x: scroll; /* ✅ Always show horizontal scroll bar */
+    overflow-x: scroll;
     overflow-y: auto;
     background-color: #1e1e1e;
     padding: 10px;
@@ -211,11 +211,10 @@ input:focus, select:focus, button:focus {
     height: calc(100vh - 100px);
 }
 
-
-
 table {
-    width: auto; /* ✅ grow based on content */
-    table-layout: auto; /* ✅ columns adjust to content size */
+    min-width: 1200px; /* 🚨 KEY: Table is wider than container */
+    width: auto;
+    table-layout: auto;
     border-collapse: collapse;
     margin-top: 20px;
 }
