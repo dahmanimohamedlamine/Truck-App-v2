@@ -221,6 +221,7 @@ table {
 
 .table-container::-webkit-scrollbar {
     height: 8px;
+    background-color: #1e1e1e; /* Background same as your table container */
 }
 
 .table-container::-webkit-scrollbar-thumb {
