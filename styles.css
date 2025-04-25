@@ -219,18 +219,19 @@ table {
     margin-top: 20px;
 }
 
+/* Horizontal scrollbar under the table */
 .table-container::-webkit-scrollbar {
     height: 8px;
-    background-color: #1e1e1e; /* Background same as your table container */
+    background: #ffffff; /* White background */
 }
 
 .table-container::-webkit-scrollbar-thumb {
-    background: #666;
+    background: #666; /* Dark grey thumb */
     border-radius: 4px;
 }
 
 .table-container::-webkit-scrollbar-track {
-    background: #1e1e1e;
+    background: #ffffff; /* White track */
 }
 
 
